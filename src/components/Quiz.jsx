@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Questions from "./Questions";
+import Questions from "./Questions" ;
 import { useState } from "react";
 
 const Container = styled("div")(({ theme }) => ({
@@ -10,13 +10,19 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: "#FFF",
   width: "90%",
   margin: "auto",
-  marginTop: "70px",
+  marginTop: "30px",
   display: "flex",
-  justifyContent: "center",
   alignItems: "center",
   justifyContent: "space-around",
   borderRadius: "20px",
   boxShadow: "0px 3px 20px #252d4a",
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
+  [theme.breakpoints.down("xs")]: {
+    flexDirection: "column",
+    padding: "10px",
+  },
 }));
 const AppName = styled("h1")(({ theme }) => ({
   width: "30%",
@@ -26,6 +32,14 @@ const AppName = styled("h1")(({ theme }) => ({
   alignItems: "center",
   fontSize: "70px",
   fontWeight: "bold",
+  [theme.breakpoints.down("md")]: {
+    width: "100%",
+    marginBottom: "20px",
+    fontSize: "50px",
+  },
+  [theme.breakpoints.down("s")]: {
+    fontSize: "40px",
+    },
 }));
 const QuizContainer = styled("div")(({ theme }) => ({
   width: "60%",
@@ -37,16 +51,32 @@ const QuizContainer = styled("div")(({ theme }) => ({
   alignItems: "center",
   borderRadius: "20px",
   boxShadow: "0px 10px 30px #252d4a",
+  [theme.breakpoints.down("md")]: {
+    width: "90%",
+    flexDirection: "column",
+    padding: "30px",
+  },
+  [theme.breakpoints.down("xs")]: {
+    flexDirection: "column",
+    padding: "25px",
+  },
 }));
 const QuestionContainer = styled("h2")(({ theme }) => ({
   width: "45%",
   color: "#ebecee",
   height: "200px",
   marginRight: "20px",
+  [theme.breakpoints.down("md")]: {
+    width: "90%",
+  },
+  [theme.breakpoints.down("xs")]: {
+    width: "100%",
+  },
 }));
 const Question = styled("h3")(({ theme }) => ({
   marginTop: "30px",
   fontWeight: "bold",
+  color: "#7cc6fe",
 }));
 const NumberOfQuestion = styled("span")(({ theme }) => ({
   fontSize: "20px",
@@ -60,6 +90,12 @@ const AnswersContainer = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
+  [theme.breakpoints.down("md")]: {
+    width: "90%",
+  },
+  [theme.breakpoints.down("xs")]: {
+    width: "100%",
+  },
 }));
 
 const Answer = styled("div")(({ theme }) => ({
@@ -76,6 +112,7 @@ const Answer = styled("div")(({ theme }) => ({
     cursor: "pointer",
     borderColor: "#7cc6fe",
   },
+  
 }));
 
 const ResultContainer = styled(QuizContainer)(({ theme }) => ({
@@ -83,10 +120,25 @@ const ResultContainer = styled(QuizContainer)(({ theme }) => ({
     flexDirection : "column",
     justifyContent : "center",
     alignItems : "center",
+    [theme.breakpoints.down("xs")]: {
+        padding: "20px  3px",
+    },
+    
 }));
 const ResultScore = styled(AppName)(({ theme }) => ({
     width: "100%",
-    color: "#FFF",
+    color: "#f3fafe",
+    fontSize: "50px",
+    [theme.breakpoints.down("lg")]: {
+        fontSize: "38px",
+    },
+    [theme.breakpoints.down("md")]: {
+        fontSize: "33px",
+    },
+    [theme.breakpoints.down("s")]: {
+        fontSize: "20px",
+    },
+    
 }));
 
 const AgainButton = styled("siv")(({ theme }) => ({
@@ -101,13 +153,20 @@ const AgainButton = styled("siv")(({ theme }) => ({
     backgroundColor: "#f24572 ",
     borderRadius: "10px",
     transition: "background-color 0.2s ease",
-    marginTop: "20px",
+    marginTop: "30px",
     color: "#fff",
     "&:hover": {
         cursor: "pointer",
         backgroundColor: "#f24572d9",
     },
-
+    
+    [theme.breakpoints.down("md")]: {
+        fontSize: "20px",
+        marginTop: "10px",
+    },
+    [theme.breakpoints.down("s")]: {
+        fontSize: "15px",
+    },
 }));
 
 const Quiz = () => {
@@ -117,7 +176,7 @@ const Quiz = () => {
 
 
   const next = (i) => {
-    if (Questions[index]["correctAnswer"]==i) setResult(result+1);
+    if (Questions[index]["correctAnswer"]===i) setResult(result+1);
     if (index === Questions.length-1) setFinish(true);
     else setIndex(index + 1);
   };
@@ -138,8 +197,9 @@ const Quiz = () => {
         ) : (
         <QuizContainer>
           <QuestionContainer>
-            Question {index + 1} /
-            <NumberOfQuestion> {Questions.length} </NumberOfQuestion>
+            Question 
+            <h1>{index + 1} /<NumberOfQuestion>{Questions.length} </NumberOfQuestion> </h1>
+            
             <Question> {Questions[index]["questionText"]}</Question>
           </QuestionContainer>
           <AnswersContainer>
